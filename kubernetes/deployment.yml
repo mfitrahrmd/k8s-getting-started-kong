@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: kong
-          image: asia-southeast2-docker.pkg.dev/k8s-getting-started-436801/k8s/kong
+          image: asia-southeast2-docker.pkg.dev/k8s-getting-started-436801/k8s-getting-started/kong
           ports:
             - containerPort: 8000
             - containerPort: 8443
