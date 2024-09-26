@@ -40,6 +40,10 @@ COPY ./kong.yml /kong/declarative/kong.yml
 
 USER kong
 
+# kong databse bootstrap
+
+RUN kong migrations bootstrap && kong migrations up && kong migrations finish
+
 ENTRYPOINT [ "/docker-entrypoint.sh" ]
 
 CMD [ "kong", "docker-start" ]
