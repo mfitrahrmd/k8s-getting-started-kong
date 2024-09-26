@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kong
+  namespace: kong
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kong
+  template:
+    metadata:
+      labels:
+        app: kong
+    spec:
+      containers:
+        - name: kong
+          image: asia-southeast2-docker.pkg.dev/k8s-getting-started-436801/k8s/kong
+          ports:
+            - containerPort: 8000
+            - containerPort: 8443
+            - containerPort: 8001
+            - containerPort: 8002
+          env:
+            - name: KONG_DATABASE
+              value: "postgres"
+            - name: KONG_PG_HOST
+              value: "172.31.33.3"
+            - name: KONG_PG_USER
+              value: "postgres"
+            - name: KONG_PG_PASSWORD
+              value: "k8s-getting-started"
+            - name: KONG_PG_DATABASE
+              value: "postgres"

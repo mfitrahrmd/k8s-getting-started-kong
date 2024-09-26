@@ -1,0 +1,7 @@
+p, customer, /greeting, GET
+p, admin, /greeting, (GET)|(POST)|(PUT)|(PATCH)|(DELETE)
+
+g, rama, admin
+g, ares, customer
+g, fajrul, customer
+g, rafif, customer
