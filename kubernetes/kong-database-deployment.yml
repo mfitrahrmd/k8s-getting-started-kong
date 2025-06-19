@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kong-database
+  namespace: kong
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kong-database
+  template:
+    metadata:
+      labels:
+        app: kong-database
+    spec:
+      containers:
+        - name: kong-database
+          image: postgres:latest
+          env:
+            - name: POSTGRES_DB
+              value: kong
+            - name: POSTGRES_USER
+              value: kong
+            - name: POSTGRES_PASSWORD
+              value: kong
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: pgdata
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: pgdata
+          emptyDir: {} # In production, replace with a PersistentVolumeClaim

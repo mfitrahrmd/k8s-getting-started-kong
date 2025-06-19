@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: kong-database
+  namespace: kong
+spec:
+  selector:
+    app: kong-database
+  ports:
+    - port: 5432
+      targetPort: 5432

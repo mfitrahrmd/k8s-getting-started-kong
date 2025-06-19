@@ -1,0 +1,26 @@
+# migration is required when using kong with database
+
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: kong-migrate
+  namespace: kong
+spec:
+  template:
+    spec:
+      containers:
+        - name: kong-migrate
+          image: kong:latest
+          env:
+            - name: KONG_DATABASE
+              value: 'postgres'
+            - name: KONG_PG_HOST
+              value: 'kong-database'
+            - name: KONG_PG_USER
+              value: 'kong'
+            - name: KONG_PG_PASSWORD
+              value: 'kong'
+            - name: KONG_PG_DATABASE
+              value: 'kong'
+          command: ['kong', 'migrations', 'bootstrap']
+      restartPolicy: OnFailure

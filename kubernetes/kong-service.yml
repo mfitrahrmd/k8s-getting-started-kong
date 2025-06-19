@@ -12,5 +12,12 @@ spec:
     - name: https
       port: 443
       targetPort: 8443
+    - name: api
+      port: 8001
+      targetPort: 8001
+    - name: ui
+      port: 8002
+      targetPort: 8002
+
   selector:
     app: kong
